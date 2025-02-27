@@ -1,6 +1,6 @@
-# SlimSpec
+# SlimSpec : Towards Zero-Shot ApiSpec-To-Doc 
 
-SlimSpec is a token-optimized format for representing API specifications with semantic precision. Designed for LLM context window efficiency.
+SlimSpec is a token-optimized format for representing API specifications with semantic precision. Designed for Zero-Shot LLM context window efficiency.
 
 ## Evaluations
 
