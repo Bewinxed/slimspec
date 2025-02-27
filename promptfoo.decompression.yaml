@@ -1,0 +1,47 @@
+# promptfoo.yaml
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+providers:
+  - id: anthropic:messages:claude-3-7-sonnet-latest
+    config:
+      temperature: 0
+      max_tokens: 9999
+  - id: google:gemini-2.0-flash-exp
+    config:
+      temperature: 0
+      max_tokens: 9999
+  - id: deepseek:deepseek-chat
+    config:
+      temperature: 0
+      max_tokens: 9999
+  - id: openai:gpt-4o-mini
+    config:
+      temperature: 0
+      max_tokens: 9999
+
+prompts:
+  - id: decompress
+    label: '📂 DECOMPRESS: SlimSpec'
+    raw: file://decompress.prompt.cjs
+
+scenarios:
+  - description: 'SlimSpec Compression and Decompression Pipeline'
+    config:
+      - vars:
+          test_name: 'Simple CRUD API'
+          original_input: file://test-cases/simple-crud/input.txt
+          compressed_input: test-output/simple-crud/compressed-{provider}.txt
+      - vars:
+          test_name: 'Complex E-commerce API'
+          original_input: file://test-cases/ecommerce/input.txt
+          compressed_input: test-output/ecommerce/compressed-{provider}.txt
+      - vars:
+          test_name: 'Nested and recursive structures'
+          original_input: file://test-cases/recursive/input.txt
+          compressed_input: test-output/recursive/compressed-{provider}.txt
+    tests:
+      - description: '📂 DECOMPRESS: {{test_name}}'
+        assert:
+          - type: llm-rubric
+            value: Evaluate if the decompressed spec is semantically identical to original input in {{original_input}}. Does it maintain all the essential structure, endpoints, parameters, and responses (ignoring descriptions/metadata, only what's needed for the clients to use the api)?
+            provider: anthropic:messages:claude-3-7-sonnet-20250219
+            threshold: 0.9

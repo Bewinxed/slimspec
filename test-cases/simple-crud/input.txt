@@ -1,0 +1,107 @@
+#%RAML 1.0
+
+types:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      username:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+        format: email
+      createdAt:
+        type: datetime
+      updatedAt:
+        type: datetime
+
+traits:
+  paged:
+    queryParameters:
+      limit:
+        type: integer
+        default: 20
+        description: Maximum number of items to return
+      offset:
+        type: integer
+        default: 0
+        description: Number of items to skip
+
+/users:
+  get:
+    description: Returns all users
+    is: [paged]
+    responses:
+      200:
+        body:
+          application/json:
+            type: array
+            items: User
+  
+  post:
+    description: Creates a new user
+    body:
+      application/json:
+        properties:
+          username:
+            type: string
+            required: true
+          email:
+            type: string
+            required: true
+            format: email
+    responses:
+      201:
+        body:
+          application/json:
+            type: User
+      400:
+        description: Bad request when validation fails
+
+  /{id}:
+    uriParameters:
+      id:
+        type: string
+        required: true
+    
+    get:
+      description: Returns a specific user
+      responses:
+        200:
+          body:
+            application/json:
+              type: User
+        404:
+          description: User not found
+    
+    put:
+      description: Updates a user
+      body:
+        application/json:
+          properties:
+            username:
+              type: string
+              required: false
+            email:
+              type: string
+              required: false
+              format: email
+      responses:
+        200:
+          body:
+            application/json:
+              type: User
+        404:
+          description: User not found
+    
+    delete:
+      description: Deletes a user
+      responses:
+        204:
+          description: User successfully deleted
+        404:
+          description: User not found

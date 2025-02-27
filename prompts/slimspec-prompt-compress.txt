@@ -1,0 +1,81 @@
+Transform RAML to SlimSpec format - a token-efficient notation that preserves EXACT semantics. Output ONLY SlimSpec.
+
+Types: s=string i=integer n=number b=boolean f=file o=object
+Date types: d(date)=date-only d(time)=time-only d(datetime)=datetime
+Formats: s(uuid) s(email) s(uri) i(int32) n(float) n(double)
+Modifiers: !=required ?=optional type[]=array
+Constraints: i>=0 i(1,100) s(3,50)=length s~regex e(val1|val2)=enum
+
+Syntax:
+@meta{title:API,version:v1,baseUri:uri,mediaType:mtype}
+@trait:exactName{param:type?=default#Description}
+@security:scheme{type:oauth2,tokenUri:s!}
+T:Type{field:s!#Description,optional:s?#Another desc}
+T:Child:Parent{newField:s!}
+E:ExactErrorName{code:i!,message:s!,details:s?}
+
+# Structure preservation
+@originalInline - Original used inline structure, not type reference
+@originalRef - Original used type reference, not inline structure
+
+# Endpoint syntax with structure indicators
+GET/path/{param:s!}|{query:i?=10,@trait:name}|{200(a/json):*Type#Description,400:{message:s!}@originalInline,404}
+POST/path|{field1:s!,field2:i?}@originalInline|{201:*Type,400:*ErrorType}
+POST/path|{*RequestType}@originalRef|{201:*Type}
+PUT/path/{id}|{*Type}|{200:*Type,404}
+DELETE/path/{id}||{204,404}
+
+Critical preservation rules:
+1. EXACT date types - use d(date), d(time), d(datetime)
+2. Original error structures - {404:*Error}, {404:{message:s!}}, or {404}
+3. Request body structure - @originalInline vs @originalRef 
+4. Response descriptions - {200:*Type#Description text}
+5. EXACT trait names with exact case - @trait:paged not @trait:Paged
+6. Media types - use (a/json) shorthand
+7. Only define error types (E:) that exist in original
+8. Preserve exact field requirements - required vs optional
+9. Keep exact parameter default values
+
+Example RAML to SlimSpec:
+```raml
+types:
+  User:
+    properties:
+      id: string
+      createdAt: 
+        type: datetime
+      email:
+        type: string
+        format: email
+        required: true
+/users:
+  post:
+    body:
+      application/json:
+        properties:
+          email: 
+            type: string
+            format: email
+            required: true
+          name: string
+    responses:
+      201:
+        description: Created
+        body:
+          application/json:
+            type: User
+      400:
+        body:
+          application/json:
+            properties:
+              message: string
+```
+↓↓↓
+```
+@meta{mediaType:application/json}
+T:User{id:s?,createdAt:d(datetime)?,email:s(email)!}
+POST/users|{email:s(email)!,name:s?}@originalInline|{201(a/json):*User#Created,400:{message:s?}}
+```
+
+OUTPUT ONLY SLIMPSEC, NOTHING ELSE, here's your input:
+{{ input_file }}

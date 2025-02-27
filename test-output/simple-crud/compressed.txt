@@ -1,0 +1,12 @@
+@meta{title:User API,version:v1,baseUri:https://example.com,mediaType:application/json}
+
+T:User{id:s(uuid)?,username:s!,email:s(email)!,createdAt:d?,updatedAt:d?}
+
+@trait:paged{limit:i?=20#Maximum number of items to return,offset:i?=0#Number of items to skip}
+
+GET/users|{@paged}|{200(a/json):*User[],404:*Error}#Returns all users
+POST/users|{username:s!,email:s(email)!}|{201(a/json):*User,400:*Error}#Creates a new user
+
+GET/users/{id:s!}||{200(a/json):*User,404:*Error}#Returns a specific user
+PUT/users/{id:s!}|{username:s?,email:s(email)?}|{200(a/json):*User,404:*Error}#Updates a user
+DELETE/users/{id:s!}||{204,404:*Error}#Deletes a user

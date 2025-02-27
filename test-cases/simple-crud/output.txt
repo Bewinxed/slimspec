@@ -1,0 +1,8 @@
+@meta{mediaType:application/json}
+T:User{id:s(uuid)?,username:s!,email:s(email)!,createdAt:d(datetime)?,updatedAt:d(datetime)?}
+@trait:paged{limit:i?=20#Maximum of items to return,offset:i?=0#Number of items to skip}
+GET/users|{@trait:paged}|{200(a/json):User[]#Returns all users}
+POST/users|{username:s!,email:s(email)!}@originalInline|{201(a/json):*User#Creates a new user,400#Bad request when validation fails}
+GET/users/{id:s!}||{200(a/json):*User#Returns a specific user,404#User not found}
+PUT/users/{id:s!}|{username:s?,email:s(email)?}@originalInline|{200(a/json):*User#Updates a user,404#User not found}
+DELETE/users/{id:s!}||{204#User successfully deleted,404#User not found}

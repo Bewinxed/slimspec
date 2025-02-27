@@ -1,0 +1,10 @@
+2025-02-26T06:17:59.243Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}
+2025-02-26T06:17:59.396Z [ERROR]: API call error: TypeError: Cannot read properties of null (reading 'data')
+2025-02-26T06:17:59.577Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}
+2025-02-26T06:17:59.721Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}
+2025-02-26T06:37:40.874Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}
+2025-02-26T06:37:41.021Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}
+2025-02-26T06:37:41.451Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}
+2025-02-26T06:37:41.490Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}
+2025-02-26T06:37:41.914Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}
+2025-02-26T06:37:42.279Z [ERROR]: Anthropic Messages API call error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}

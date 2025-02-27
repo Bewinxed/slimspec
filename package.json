@@ -1,0 +1,23 @@
+{
+  "name": "llmwave-test-suite",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "bunx promptfoo eval -c promptfoo.compression.yaml && bunx promptfoo eval -c promptfoo.decompression.yaml",
+    "evaluate": "promptfoo eval -c promptfoo.yaml"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "promptfoo": "^0.105.0",
+    "raml2obj": "^6.8.1",
+    "yaml": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3",
+    "bun-types": "latest",
+    "@types/bun": "latest"
+  },
+  "module": "index.ts",
+  "private": true
+}

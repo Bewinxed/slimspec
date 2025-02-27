@@ -1,0 +1,371 @@
+{
+  "evalId": "eval-Ykw-2025-02-27T04:51:52",
+  "results": {
+    "version": 3,
+    "timestamp": "2025-02-27T04:51:52.269Z",
+    "prompts": [
+      {
+        "raw": "# SlimSpec API Syntax\n## Syntax\n\n### Type System\n```\nT:TypeName{field1:s!,field2:i?,field3:*RefType}           # Type definition\nF:FieldTemplate{common1:s!,common2:b?}                   # Field template \nE:ErrorType{message:s!,code:s!,details:s?}               # Error definition\nT:Child:Parent{newField:s!}                              # Type inheritance\nT:Composite{+FieldTemplate,additionalField:n>0}          # Field composition\nT:Recursive{id:s!,children:*Recursive[]?}                # Self-reference\n```\n\n### Type Abbreviations\n- `s` - String\n- `i` - Integer\n- `n` - Number/float\n- `b` - Boolean\n- `d` - Date/time\n- `*Type` - Type reference\n- `type[]` - Array\n- `type!` - Required\n- `type?` - Optional\n\n### Constraints\n- `n>0`, `i>=5` - Numeric constraints\n- `s~pattern` - Regex pattern\n- `e(val1|val2)` - Enumeration\n- `n(0,10)` - Range\n\n### Endpoints\n```\nG/path/{param:s!}|{query:i?}|{200:*Response,404:*NotFound}\nPU/path|{body:*Request!}|{201:*Response,400:*ValidationError}\nPT/path/{id:s!}|{field:s!}|{200:*Response}\nPA/path/{id:s!}|{field:s?}|{200:*Response}\nD/path/{id:s!}||{204,404}\n```\n\n## Transformation Rules\n\n1. Create types for all data models/schemas\n2. Extract common fields into field templates\n3. Define error types for API responses\n4. Use inheritance for type hierarchies\n5. Preserve all validation constraints\n6. Support recursive references\n7. Document all endpoints with their request/response formats\n\n## Output Format\n\nYour output must include:\n1. Field templates (F:) for common patterns\n2. Error definitions (E:) for all error types\n3. Type definitions (T:) for all data models\n4. Endpoint definitions using the HTTP method prefixes\n\n## Example\n\n```input\nUser resource:\n- id (string, UUID)\n- username (string, required)\n- email (string, email format, required)\n- role (string, enum: \"user\" or \"admin\", default: \"user\")\n- createdAt (datetime, auto-generated)\n\nGET /users\n- Query params: role (string, optional), limit (integer, default: 20)\n- Success: 200 OK, returns array of User objects\n- Error: 500 Internal Server Error\n\nGET /users/{userId}\n- Path params: userId (string, required)\n- Success: 200 OK, returns User object\n- Error: 404 Not Found if user doesn't exist\n```\n\n```output\nF:Timestamps{createdAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:ServerError{message:s!}\n\nT:User{id:s!,username:s!,email:s!,role:e(user|admin)?=user,+Timestamps}\n\nG/users|{role:s?,limit:i?=20}|{200:*User[],500:*ServerError}\nG/users/{userId:s!}|{200:*User,404:*NotFound}\n```\n\nOutput only SlimSpec, NOTHING ELSE, here's your input:\n{{ input_file }}",
+        "label": "📦 COMPRESS: SlimSpec: prompts/slimspec-prompt-compress.txt: # SlimSpec API Syntax\n## Syntax\n\n### Type System\n```\nT:TypeName{field1:s!,field2:i?,field3:*RefType}           # Type definition\nF:FieldTemplate{common1:s!,common2:b?}                   # Field template \nE:ErrorType{message:s!,code:s!,details:s?}               # Error definition\nT:Child:Parent{newField:s!}                              # Type inheritance\nT:Composite{+FieldTemplate,additionalField:n>0}          # Field composition\nT:Recursive{id:s!,children:*Recursive[]?}                # Self-reference\n```\n\n### Type Abbreviations\n- `s` - String\n- `i` - Integer\n- `n` - Number/float\n- `b` - Boolean\n- `d` - Date/time\n- `*Type` - Type reference\n- `type[]` - Array\n- `type!` - Required\n- `type?` - Optional\n\n### Constraints\n- `n>0`, `i>=5` - Numeric constraints\n- `s~pattern` - Regex pattern\n- `e(val1|val2)` - Enumeration\n- `n(0,10)` - Range\n\n### Endpoints\n```\nG/path/{param:s!}|{query:i?}|{200:*Response,404:*NotFound}\nPU/path|{body:*Request!}|{201:*Response,400:*ValidationError}\nPT/path/{id:s!}|{field:s!}|{200:*Response}\nPA/path/{id:s!}|{field:s?}|{200:*Response}\nD/path/{id:s!}||{204,404}\n```\n\n## Transformation Rules\n\n1. Create types for all data models/schemas\n2. Extract common fields into field templates\n3. Define error types for API responses\n4. Use inheritance for type hierarchies\n5. Preserve all validation constraints\n6. Support recursive references\n7. Document all endpoints with their request/response formats\n\n## Output Format\n\nYour output must include:\n1. Field templates (F:) for common patterns\n2. Error definitions (E:) for all error types\n3. Type definitions (T:) for all data models\n4. Endpoint definitions using the HTTP method prefixes\n\n## Example\n\n```input\nUser resource:\n- id (string, UUID)\n- username (string, required)\n- email (string, email format, required)\n- role (string, enum: \"user\" or \"admin\", default: \"user\")\n- createdAt (datetime, auto-generated)\n\nGET /users\n- Query params: role (string, optional), limit (integer, default: 20)\n- Success: 200 OK, returns array of User objects\n- Error: 500 Internal Server Error\n\nGET /users/{userId}\n- Path params: userId (string, required)\n- Success: 200 OK, returns User object\n- Error: 404 Not Found if user doesn't exist\n```\n\n```output\nF:Timestamps{createdAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:ServerError{message:s!}\n\nT:User{id:s!,username:s!,email:s!,role:e(user|admin)?=user,+Timestamps}\n\nG/users|{role:s?,limit:i?=20}|{200:*User[],500:*ServerError}\nG/users/{userId:s!}|{200:*User,404:*NotFound}\n```\n\nOutput only SlimSpec, NOTHING ELSE, here's your input:\n{{ input_file }}",
+        "id": "659a158231aa8c23cd843171e3489f9820ba79cdf5ec87918970ff3152f16468",
+        "provider": "anthropic:messages:claude-3-7-sonnet-20250219",
+        "metrics": {
+          "score": 0.9703551047059079,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 1,
+          "assertFailCount": 0,
+          "totalLatencyMs": 7,
+          "tokenUsage": {
+            "total": 1539,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 1539,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0.007641
+        }
+      },
+      {
+        "raw": "# SlimSpec API Syntax\n## Syntax\n\n### Type System\n```\nT:TypeName{field1:s!,field2:i?,field3:*RefType}           # Type definition\nF:FieldTemplate{common1:s!,common2:b?}                   # Field template \nE:ErrorType{message:s!,code:s!,details:s?}               # Error definition\nT:Child:Parent{newField:s!}                              # Type inheritance\nT:Composite{+FieldTemplate,additionalField:n>0}          # Field composition\nT:Recursive{id:s!,children:*Recursive[]?}                # Self-reference\n```\n\n### Type Abbreviations\n- `s` - String\n- `i` - Integer\n- `n` - Number/float\n- `b` - Boolean\n- `d` - Date/time\n- `*Type` - Type reference\n- `type[]` - Array\n- `type!` - Required\n- `type?` - Optional\n\n### Constraints\n- `n>0`, `i>=5` - Numeric constraints\n- `s~pattern` - Regex pattern\n- `e(val1|val2)` - Enumeration\n- `n(0,10)` - Range\n\n### Endpoints\n```\nG/path/{param:s!}|{query:i?}|{200:*Response,404:*NotFound}\nPU/path|{body:*Request!}|{201:*Response,400:*ValidationError}\nPT/path/{id:s!}|{field:s!}|{200:*Response}\nPA/path/{id:s!}|{field:s?}|{200:*Response}\nD/path/{id:s!}||{204,404}\n```\n\n## Transformation Rules\n\n1. Create types for all data models/schemas\n2. Extract common fields into field templates\n3. Define error types for API responses\n4. Use inheritance for type hierarchies\n5. Preserve all validation constraints\n6. Support recursive references\n7. Document all endpoints with their request/response formats\n\n## Output Format\n\nYour output must include:\n1. Field templates (F:) for common patterns\n2. Error definitions (E:) for all error types\n3. Type definitions (T:) for all data models\n4. Endpoint definitions using the HTTP method prefixes\n\n## Example\n\n```input\nUser resource:\n- id (string, UUID)\n- username (string, required)\n- email (string, email format, required)\n- role (string, enum: \"user\" or \"admin\", default: \"user\")\n- createdAt (datetime, auto-generated)\n\nGET /users\n- Query params: role (string, optional), limit (integer, default: 20)\n- Success: 200 OK, returns array of User objects\n- Error: 500 Internal Server Error\n\nGET /users/{userId}\n- Path params: userId (string, required)\n- Success: 200 OK, returns User object\n- Error: 404 Not Found if user doesn't exist\n```\n\n```output\nF:Timestamps{createdAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:ServerError{message:s!}\n\nT:User{id:s!,username:s!,email:s!,role:e(user|admin)?=user,+Timestamps}\n\nG/users|{role:s?,limit:i?=20}|{200:*User[],500:*ServerError}\nG/users/{userId:s!}|{200:*User,404:*NotFound}\n```\n\nOutput only SlimSpec, NOTHING ELSE, here's your input:\n{{ input_file }}",
+        "label": "📦 COMPRESS: SlimSpec: prompts/slimspec-prompt-compress.txt: # SlimSpec API Syntax\n## Syntax\n\n### Type System\n```\nT:TypeName{field1:s!,field2:i?,field3:*RefType}           # Type definition\nF:FieldTemplate{common1:s!,common2:b?}                   # Field template \nE:ErrorType{message:s!,code:s!,details:s?}               # Error definition\nT:Child:Parent{newField:s!}                              # Type inheritance\nT:Composite{+FieldTemplate,additionalField:n>0}          # Field composition\nT:Recursive{id:s!,children:*Recursive[]?}                # Self-reference\n```\n\n### Type Abbreviations\n- `s` - String\n- `i` - Integer\n- `n` - Number/float\n- `b` - Boolean\n- `d` - Date/time\n- `*Type` - Type reference\n- `type[]` - Array\n- `type!` - Required\n- `type?` - Optional\n\n### Constraints\n- `n>0`, `i>=5` - Numeric constraints\n- `s~pattern` - Regex pattern\n- `e(val1|val2)` - Enumeration\n- `n(0,10)` - Range\n\n### Endpoints\n```\nG/path/{param:s!}|{query:i?}|{200:*Response,404:*NotFound}\nPU/path|{body:*Request!}|{201:*Response,400:*ValidationError}\nPT/path/{id:s!}|{field:s!}|{200:*Response}\nPA/path/{id:s!}|{field:s?}|{200:*Response}\nD/path/{id:s!}||{204,404}\n```\n\n## Transformation Rules\n\n1. Create types for all data models/schemas\n2. Extract common fields into field templates\n3. Define error types for API responses\n4. Use inheritance for type hierarchies\n5. Preserve all validation constraints\n6. Support recursive references\n7. Document all endpoints with their request/response formats\n\n## Output Format\n\nYour output must include:\n1. Field templates (F:) for common patterns\n2. Error definitions (E:) for all error types\n3. Type definitions (T:) for all data models\n4. Endpoint definitions using the HTTP method prefixes\n\n## Example\n\n```input\nUser resource:\n- id (string, UUID)\n- username (string, required)\n- email (string, email format, required)\n- role (string, enum: \"user\" or \"admin\", default: \"user\")\n- createdAt (datetime, auto-generated)\n\nGET /users\n- Query params: role (string, optional), limit (integer, default: 20)\n- Success: 200 OK, returns array of User objects\n- Error: 500 Internal Server Error\n\nGET /users/{userId}\n- Path params: userId (string, required)\n- Success: 200 OK, returns User object\n- Error: 404 Not Found if user doesn't exist\n```\n\n```output\nF:Timestamps{createdAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:ServerError{message:s!}\n\nT:User{id:s!,username:s!,email:s!,role:e(user|admin)?=user,+Timestamps}\n\nG/users|{role:s?,limit:i?=20}|{200:*User[],500:*ServerError}\nG/users/{userId:s!}|{200:*User,404:*NotFound}\n```\n\nOutput only SlimSpec, NOTHING ELSE, here's your input:\n{{ input_file }}",
+        "id": "659a158231aa8c23cd843171e3489f9820ba79cdf5ec87918970ff3152f16468",
+        "provider": "google:gemini-2.0-flash-exp",
+        "metrics": {
+          "score": 0.9693282392627696,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 1,
+          "assertFailCount": 0,
+          "totalLatencyMs": 9,
+          "tokenUsage": {
+            "total": 1523,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 1523,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0.007641,
+        "gradingResult": {
+          "pass": true,
+          "score": 0.9703551047059079,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 334,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 334
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "similar",
+                "value": "{{expected_compressed}}",
+                "threshold": 0.7
+              },
+              "pass": true,
+              "score": 0.9703551047059079,
+              "reason": "Similarity 0.97 is greater than threshold 0.7",
+              "tokensUsed": {
+                "total": 334,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 334,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "44fed019-8231-4bb3-93f8-6022582f2df0",
+        "latencyMs": 7,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# SlimSpec API Syntax\n## Syntax\n\n### Type System\n```\nT:TypeName{field1:s!,field2:i?,field3:*RefType}           # Type definition\nF:FieldTemplate{common1:s!,common2:b?}                   # Field template \nE:ErrorType{message:s!,code:s!,details:s?}               # Error definition\nT:Child:Parent{newField:s!}                              # Type inheritance\nT:Composite{+FieldTemplate,additionalField:n>0}          # Field composition\nT:Recursive{id:s!,children:*Recursive[]?}                # Self-reference\n```\n\n### Type Abbreviations\n- `s` - String\n- `i` - Integer\n- `n` - Number/float\n- `b` - Boolean\n- `d` - Date/time\n- `*Type` - Type reference\n- `type[]` - Array\n- `type!` - Required\n- `type?` - Optional\n\n### Constraints\n- `n>0`, `i>=5` - Numeric constraints\n- `s~pattern` - Regex pattern\n- `e(val1|val2)` - Enumeration\n- `n(0,10)` - Range\n\n### Endpoints\n```\nG/path/{param:s!}|{query:i?}|{200:*Response,404:*NotFound}\nPU/path|{body:*Request!}|{201:*Response,400:*ValidationError}\nPT/path/{id:s!}|{field:s!}|{200:*Response}\nPA/path/{id:s!}|{field:s?}|{200:*Response}\nD/path/{id:s!}||{204,404}\n```\n\n## Transformation Rules\n\n1. Create types for all data models/schemas\n2. Extract common fields into field templates\n3. Define error types for API responses\n4. Use inheritance for type hierarchies\n5. Preserve all validation constraints\n6. Support recursive references\n7. Document all endpoints with their request/response formats\n\n## Output Format\n\nYour output must include:\n1. Field templates (F:) for common patterns\n2. Error definitions (E:) for all error types\n3. Type definitions (T:) for all data models\n4. Endpoint definitions using the HTTP method prefixes\n\n## Example\n\n```input\nUser resource:\n- id (string, UUID)\n- username (string, required)\n- email (string, email format, required)\n- role (string, enum: \"user\" or \"admin\", default: \"user\")\n- createdAt (datetime, auto-generated)\n\nGET /users\n- Query params: role (string, optional), limit (integer, default: 20)\n- Success: 200 OK, returns array of User objects\n- Error: 500 Internal Server Error\n\nGET /users/{userId}\n- Path params: userId (string, required)\n- Success: 200 OK, returns User object\n- Error: 404 Not Found if user doesn't exist\n```\n\n```output\nF:Timestamps{createdAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:ServerError{message:s!}\n\nT:User{id:s!,username:s!,email:s!,role:e(user|admin)?=user,+Timestamps}\n\nG/users|{role:s?,limit:i?=20}|{200:*User[],500:*ServerError}\nG/users/{userId:s!}|{200:*User,404:*NotFound}\n```\n\nOutput only SlimSpec, NOTHING ELSE, here's your input:\n#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+          "label": "📦 COMPRESS: SlimSpec: prompts/slimspec-prompt-compress.txt: # SlimSpec API Syntax\n## Syntax\n\n### Type System\n```\nT:TypeName{field1:s!,field2:i?,field3:*RefType}           # Type definition\nF:FieldTemplate{common1:s!,common2:b?}                   # Field template \nE:ErrorType{message:s!,code:s!,details:s?}               # Error definition\nT:Child:Parent{newField:s!}                              # Type inheritance\nT:Composite{+FieldTemplate,additionalField:n>0}          # Field composition\nT:Recursive{id:s!,children:*Recursive[]?}                # Self-reference\n```\n\n### Type Abbreviations\n- `s` - String\n- `i` - Integer\n- `n` - Number/float\n- `b` - Boolean\n- `d` - Date/time\n- `*Type` - Type reference\n- `type[]` - Array\n- `type!` - Required\n- `type?` - Optional\n\n### Constraints\n- `n>0`, `i>=5` - Numeric constraints\n- `s~pattern` - Regex pattern\n- `e(val1|val2)` - Enumeration\n- `n(0,10)` - Range\n\n### Endpoints\n```\nG/path/{param:s!}|{query:i?}|{200:*Response,404:*NotFound}\nPU/path|{body:*Request!}|{201:*Response,400:*ValidationError}\nPT/path/{id:s!}|{field:s!}|{200:*Response}\nPA/path/{id:s!}|{field:s?}|{200:*Response}\nD/path/{id:s!}||{204,404}\n```\n\n## Transformation Rules\n\n1. Create types for all data models/schemas\n2. Extract common fields into field templates\n3. Define error types for API responses\n4. Use inheritance for type hierarchies\n5. Preserve all validation constraints\n6. Support recursive references\n7. Document all endpoints with their request/response formats\n\n## Output Format\n\nYour output must include:\n1. Field templates (F:) for common patterns\n2. Error definitions (E:) for all error types\n3. Type definitions (T:) for all data models\n4. Endpoint definitions using the HTTP method prefixes\n\n## Example\n\n```input\nUser resource:\n- id (string, UUID)\n- username (string, required)\n- email (string, email format, required)\n- role (string, enum: \"user\" or \"admin\", default: \"user\")\n- createdAt (datetime, auto-generated)\n\nGET /users\n- Query params: role (string, optional), limit (integer, default: 20)\n- Success: 200 OK, returns array of User objects\n- Error: 500 Internal Server Error\n\nGET /users/{userId}\n- Path params: userId (string, required)\n- Success: 200 OK, returns User object\n- Error: 404 Not Found if user doesn't exist\n```\n\n```output\nF:Timestamps{createdAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:ServerError{message:s!}\n\nT:User{id:s!,username:s!,email:s!,role:e(user|admin)?=user,+Timestamps}\n\nG/users|{role:s?,limit:i?=20}|{200:*User[],500:*ServerError}\nG/users/{userId:s!}|{200:*User,404:*NotFound}\n```\n\nOutput only SlimSpec, NOTHING ELSE, here's your input:\n{{ input_file }}"
+        },
+        "promptId": "659a158231aa8c23cd843171e3489f9820ba79cdf5ec87918970ff3152f16468",
+        "promptIdx": 0,
+        "provider": {
+          "id": "anthropic:messages:claude-3-7-sonnet-20250219",
+          "label": ""
+        },
+        "response": {
+          "output": "F:Timestamps{createdAt:d!,updatedAt:d!}\nF:Paged{limit:i?=20,offset:i?=0}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,createdAt:d!,updatedAt:d!}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{+Paged}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}|{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+          "tokenUsage": {
+            "cached": 1539,
+            "total": 1539
+          },
+          "cost": 0.007641
+        },
+        "score": 0.9703551047059079,
+        "success": true,
+        "testCase": {
+          "metadata": {},
+          "options": {},
+          "vars": {
+            "test_name": "Simple CRUD API",
+            "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+            "expected_compressed": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}||{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+            "input_file": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found"
+          },
+          "assert": [
+            {
+              "type": "similar",
+              "value": "{{expected_compressed}}",
+              "threshold": 0.7
+            }
+          ],
+          "description": "📦 COMPRESS: {{test_name}}"
+        },
+        "testIdx": 0,
+        "vars": {
+          "test_name": "Simple CRUD API",
+          "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+          "expected_compressed": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}||{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+          "input_file": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found"
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 0.9693282392627696,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 323,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 323
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "similar",
+                "value": "{{expected_compressed}}",
+                "threshold": 0.7
+              },
+              "pass": true,
+              "score": 0.9693282392627696,
+              "reason": "Similarity 0.97 is greater than threshold 0.7",
+              "tokensUsed": {
+                "total": 323,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 323,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "4f7dfb63-98df-4dc9-aa00-c056f84c6af5",
+        "latencyMs": 9,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# SlimSpec API Syntax\n## Syntax\n\n### Type System\n```\nT:TypeName{field1:s!,field2:i?,field3:*RefType}           # Type definition\nF:FieldTemplate{common1:s!,common2:b?}                   # Field template \nE:ErrorType{message:s!,code:s!,details:s?}               # Error definition\nT:Child:Parent{newField:s!}                              # Type inheritance\nT:Composite{+FieldTemplate,additionalField:n>0}          # Field composition\nT:Recursive{id:s!,children:*Recursive[]?}                # Self-reference\n```\n\n### Type Abbreviations\n- `s` - String\n- `i` - Integer\n- `n` - Number/float\n- `b` - Boolean\n- `d` - Date/time\n- `*Type` - Type reference\n- `type[]` - Array\n- `type!` - Required\n- `type?` - Optional\n\n### Constraints\n- `n>0`, `i>=5` - Numeric constraints\n- `s~pattern` - Regex pattern\n- `e(val1|val2)` - Enumeration\n- `n(0,10)` - Range\n\n### Endpoints\n```\nG/path/{param:s!}|{query:i?}|{200:*Response,404:*NotFound}\nPU/path|{body:*Request!}|{201:*Response,400:*ValidationError}\nPT/path/{id:s!}|{field:s!}|{200:*Response}\nPA/path/{id:s!}|{field:s?}|{200:*Response}\nD/path/{id:s!}||{204,404}\n```\n\n## Transformation Rules\n\n1. Create types for all data models/schemas\n2. Extract common fields into field templates\n3. Define error types for API responses\n4. Use inheritance for type hierarchies\n5. Preserve all validation constraints\n6. Support recursive references\n7. Document all endpoints with their request/response formats\n\n## Output Format\n\nYour output must include:\n1. Field templates (F:) for common patterns\n2. Error definitions (E:) for all error types\n3. Type definitions (T:) for all data models\n4. Endpoint definitions using the HTTP method prefixes\n\n## Example\n\n```input\nUser resource:\n- id (string, UUID)\n- username (string, required)\n- email (string, email format, required)\n- role (string, enum: \"user\" or \"admin\", default: \"user\")\n- createdAt (datetime, auto-generated)\n\nGET /users\n- Query params: role (string, optional), limit (integer, default: 20)\n- Success: 200 OK, returns array of User objects\n- Error: 500 Internal Server Error\n\nGET /users/{userId}\n- Path params: userId (string, required)\n- Success: 200 OK, returns User object\n- Error: 404 Not Found if user doesn't exist\n```\n\n```output\nF:Timestamps{createdAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:ServerError{message:s!}\n\nT:User{id:s!,username:s!,email:s!,role:e(user|admin)?=user,+Timestamps}\n\nG/users|{role:s?,limit:i?=20}|{200:*User[],500:*ServerError}\nG/users/{userId:s!}|{200:*User,404:*NotFound}\n```\n\nOutput only SlimSpec, NOTHING ELSE, here's your input:\n#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+          "label": "📦 COMPRESS: SlimSpec: prompts/slimspec-prompt-compress.txt: # SlimSpec API Syntax\n## Syntax\n\n### Type System\n```\nT:TypeName{field1:s!,field2:i?,field3:*RefType}           # Type definition\nF:FieldTemplate{common1:s!,common2:b?}                   # Field template \nE:ErrorType{message:s!,code:s!,details:s?}               # Error definition\nT:Child:Parent{newField:s!}                              # Type inheritance\nT:Composite{+FieldTemplate,additionalField:n>0}          # Field composition\nT:Recursive{id:s!,children:*Recursive[]?}                # Self-reference\n```\n\n### Type Abbreviations\n- `s` - String\n- `i` - Integer\n- `n` - Number/float\n- `b` - Boolean\n- `d` - Date/time\n- `*Type` - Type reference\n- `type[]` - Array\n- `type!` - Required\n- `type?` - Optional\n\n### Constraints\n- `n>0`, `i>=5` - Numeric constraints\n- `s~pattern` - Regex pattern\n- `e(val1|val2)` - Enumeration\n- `n(0,10)` - Range\n\n### Endpoints\n```\nG/path/{param:s!}|{query:i?}|{200:*Response,404:*NotFound}\nPU/path|{body:*Request!}|{201:*Response,400:*ValidationError}\nPT/path/{id:s!}|{field:s!}|{200:*Response}\nPA/path/{id:s!}|{field:s?}|{200:*Response}\nD/path/{id:s!}||{204,404}\n```\n\n## Transformation Rules\n\n1. Create types for all data models/schemas\n2. Extract common fields into field templates\n3. Define error types for API responses\n4. Use inheritance for type hierarchies\n5. Preserve all validation constraints\n6. Support recursive references\n7. Document all endpoints with their request/response formats\n\n## Output Format\n\nYour output must include:\n1. Field templates (F:) for common patterns\n2. Error definitions (E:) for all error types\n3. Type definitions (T:) for all data models\n4. Endpoint definitions using the HTTP method prefixes\n\n## Example\n\n```input\nUser resource:\n- id (string, UUID)\n- username (string, required)\n- email (string, email format, required)\n- role (string, enum: \"user\" or \"admin\", default: \"user\")\n- createdAt (datetime, auto-generated)\n\nGET /users\n- Query params: role (string, optional), limit (integer, default: 20)\n- Success: 200 OK, returns array of User objects\n- Error: 500 Internal Server Error\n\nGET /users/{userId}\n- Path params: userId (string, required)\n- Success: 200 OK, returns User object\n- Error: 404 Not Found if user doesn't exist\n```\n\n```output\nF:Timestamps{createdAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:ServerError{message:s!}\n\nT:User{id:s!,username:s!,email:s!,role:e(user|admin)?=user,+Timestamps}\n\nG/users|{role:s?,limit:i?=20}|{200:*User[],500:*ServerError}\nG/users/{userId:s!}|{200:*User,404:*NotFound}\n```\n\nOutput only SlimSpec, NOTHING ELSE, here's your input:\n{{ input_file }}"
+        },
+        "promptId": "659a158231aa8c23cd843171e3489f9820ba79cdf5ec87918970ff3152f16468",
+        "promptIdx": 1,
+        "provider": {
+          "id": "google:gemini-2.0-flash-exp",
+          "label": ""
+        },
+        "response": {
+          "output": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:BadRequest{message:s!}\n\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:CreateUser{username:s!,email:s!}\nT:UpdateUser{username:s?,email:s?}\n\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPU/users|{body:*CreateUser!}|{201:*User,400:*BadRequest}\nG/users/{id:s!}|{200:*User,404:*NotFound}\nPT/users/{id:s!}|{body:*UpdateUser}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404}\n",
+          "tokenUsage": {
+            "cached": 1523,
+            "total": 1523,
+            "numRequests": 0
+          },
+          "raw": {
+            "candidates": [
+              {
+                "content": {
+                  "parts": [
+                    {
+                      "text": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{resource:s!,id:s!}\nE:BadRequest{message:s!}\n\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:CreateUser{username:s!,email:s!}\nT:UpdateUser{username:s?,email:s?}\n\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPU/users|{body:*CreateUser!}|{201:*User,400:*BadRequest}\nG/users/{id:s!}|{200:*User,404:*NotFound}\nPT/users/{id:s!}|{body:*UpdateUser}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404}\n"
+                    }
+                  ],
+                  "role": "model"
+                },
+                "finishReason": "STOP",
+                "avgLogprobs": -0.008798007454190935
+              }
+            ],
+            "usageMetadata": {
+              "promptTokenCount": 1327,
+              "candidatesTokenCount": 196,
+              "totalTokenCount": 1523,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 1327
+                }
+              ],
+              "candidatesTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 196
+                }
+              ]
+            },
+            "modelVersion": "gemini-2.0-flash-exp"
+          },
+          "cached": true
+        },
+        "score": 0.9693282392627696,
+        "success": true,
+        "testCase": {
+          "metadata": {},
+          "options": {},
+          "vars": {
+            "test_name": "Simple CRUD API",
+            "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+            "expected_compressed": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}||{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+            "input_file": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found"
+          },
+          "assert": [
+            {
+              "type": "similar",
+              "value": "{{expected_compressed}}",
+              "threshold": 0.7
+            }
+          ],
+          "description": "📦 COMPRESS: {{test_name}}"
+        },
+        "testIdx": 0,
+        "vars": {
+          "test_name": "Simple CRUD API",
+          "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+          "expected_compressed": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}||{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+          "input_file": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found"
+        },
+        "metadata": {},
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 2,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "cached": 3062,
+        "completion": 0,
+        "prompt": 0,
+        "total": 3062,
+        "numRequests": 2,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0
+        }
+      }
+    }
+  },
+  "config": {
+    "tags": {},
+    "prompts": [
+      {
+        "id": "compress",
+        "label": "📦 COMPRESS: SlimSpec",
+        "raw": "prompts/slimspec-prompt-compress.txt"
+      }
+    ],
+    "providers": [
+      {
+        "id": "anthropic:messages:claude-3-7-sonnet-20250219",
+        "config": {
+          "temperature": 0,
+          "max_tokens": 9999
+        }
+      },
+      {
+        "id": "google:gemini-2.0-flash-exp",
+        "config": {
+          "temperature": 0,
+          "max_tokens": 9999
+        }
+      }
+    ],
+    "tests": [],
+    "scenarios": [
+      {
+        "description": "SlimSpec Compression and Decompression Pipeline",
+        "config": [
+          {
+            "vars": {
+              "test_name": "Simple CRUD API",
+              "original_input": "file://test-cases/simple-crud/input.txt",
+              "expected_compressed": "file://test-cases/simple-crud/output.txt"
+            }
+          }
+        ],
+        "tests": [
+          {
+            "description": "📦 COMPRESS: {{test_name}}",
+            "vars": {
+              "input_file": "{{original_input}}"
+            },
+            "assert": [
+              {
+                "type": "similar",
+                "value": "{{expected_compressed}}",
+                "threshold": 0.7
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "env": {},
+    "sharing": true,
+    "defaultTest": {
+      "vars": {},
+      "assert": [],
+      "options": {},
+      "metadata": {}
+    },
+    "outputPath": [
+      "output_compress.json"
+    ],
+    "extensions": [],
+    "metadata": {}
+  },
+  "shareableUrl": null
+}

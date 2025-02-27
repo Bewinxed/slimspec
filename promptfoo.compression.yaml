@@ -1,0 +1,56 @@
+# promptfoo.yaml
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+providers:
+  - id: anthropic:messages:claude-3-7-sonnet-latest
+    config:
+      temperature: 0
+      max_tokens: 8192
+  - id: google:gemini-2.0-flash-exp
+    config:
+      temperature: 0
+      max_tokens: 8192
+  - id: deepseek:deepseek-chat
+    config:
+      temperature: 0
+      max_tokens: 8192
+  - id: openai:gpt-4o-mini
+    config:
+      temperature: 0
+      max_tokens: 8192
+
+prompts:
+  - id: compress
+    label: '📦 COMPRESS: SlimSpec'
+    raw: prompts/slimspec-prompt-compress.txt
+
+scenarios:
+  - description: 'SlimSpec Compression and Decompression Pipeline'
+    config:
+      - vars:
+          test_name: 'Simple CRUD API'
+          original_input: file://test-cases/simple-crud/input.txt
+          expected_compressed: file://test-cases/simple-crud/output.txt
+          compressed_output: 'test-output/simple-crud/compressed-{provider}.txt'
+      - vars:
+          test_name: 'Complex E-commerce API'
+          original_input: file://test-cases/ecommerce/input.txt
+          expected_compressed: file://test-cases/ecommerce/output.txt
+          compressed_output: 'test-output/ecommerce/compressed-{provider}.txt'
+      - vars:
+          test_name: 'Nested and recursive structures'
+          original_input: file://test-cases/recursive/input.txt
+          expected_compressed: file://test-cases/recursive/output.txt
+          compressed_output: 'test-output/recursive/compressed-{provider}.txt'
+    tests:
+      - description: '📦 COMPRESS: {{test_name}}'
+        vars:
+          input_file: '{{original_input}}'
+        assert:
+          - type: similar
+            value: '{{expected_compressed}}'
+            threshold: 0.7
+            weight: 1
+          - type: javascript
+            value: file://writer.cjs
+            provider: anthropic:messages:claude-3-7-sonnet-20250219
+            weight: 0

@@ -1,0 +1,12 @@
+```
+@meta{mediaType:application/json}
+T:User{id:s(uuid)?,username:s!,email:s!}
+T:Comment{id:s(uuid)?,postId:s!,userId:s!,content:s!,parentId:s?#References another comment id,replies:Comment[]?,createdAt:d(datetime)?,updatedAt:d(datetime)?}
+T:Category{id:s(uuid)?,name:s!,description:s?,parentId:s?#References another category id,subCategories:Category[]?,level:i!}
+
+GET/comments|{postId:s!,includeReplies:b?=true}|{200(a/json):Comment[]#Get all comments for a post}
+POST/comments|{postId:s!,userId:s!,content:s!,parentId:s?}@originalInline|{201(a/json):*Comment,400#Validation failed}
+
+GET/categories|{includeSubCategories:b?=true}|{200(a/json):Category[]#Get category tree}
+POST/categories|{name:s!,description:s?,parentId:s?}@originalInline|{201(a/json):*Category,400#Validation failed}
+```

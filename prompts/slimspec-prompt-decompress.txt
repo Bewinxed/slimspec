@@ -1,0 +1,2 @@
+Transform the following SlimSpec notation into RAML, do not output anything else:
+{{ compressed_input }}

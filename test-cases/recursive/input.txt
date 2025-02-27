@@ -1,0 +1,144 @@
+#%RAML 1.0
+
+types:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      username:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+  
+  Comment:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      postId:
+        type: string
+        required: true
+      userId:
+        type: string
+        required: true
+      content:
+        type: string
+        required: true
+      parentId:
+        type: string
+        required: false
+        description: References another comment id
+      replies:
+        type: array
+        items: Comment
+        required: false
+      createdAt:
+        type: datetime
+      updatedAt:
+        type: datetime
+  
+  Category:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        required: true
+      description:
+        type: string
+      parentId:
+        type: string
+        required: false
+        description: References another category id
+      subCategories:
+        type: array
+        items: Category
+        required: false
+      level:
+        type: integer
+        required: true
+
+/comments:
+  get:
+    description: Get all comments for a post
+    queryParameters:
+      postId:
+        type: string
+        required: true
+      includeReplies:
+        type: boolean
+        default: true
+    responses:
+      200:
+        body:
+          application/json:
+            type: array
+            items: Comment
+  
+  post:
+    description: Create a new comment
+    body:
+      application/json:
+        properties:
+          postId:
+            type: string
+            required: true
+          userId:
+            type: string
+            required: true
+          content:
+            type: string
+            required: true
+          parentId:
+            type: string
+            required: false
+    responses:
+      201:
+        body:
+          application/json:
+            type: Comment
+      400:
+        description: Validation failed
+
+/categories:
+  get:
+    description: Get category tree
+    queryParameters:
+      includeSubCategories:
+        type: boolean
+        default: true
+    responses:
+      200:
+        body:
+          application/json:
+            type: array
+            items: Category
+  
+  post:
+    description: Create a new category
+    body:
+      application/json:
+        properties:
+          name:
+            type: string
+            required: true
+          description:
+            type: string
+            required: false
+          parentId:
+            type: string
+            required: false
+    responses:
+      201:
+        body:
+          application/json:
+            type: Category
+      400:
+        description: Validation failed

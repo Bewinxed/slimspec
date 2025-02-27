@@ -1,0 +1,13 @@
+{
+  "vars": {
+    "id": "simple-crud",
+    "test_name": "Simple CRUD API",
+    "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+    "compressed_input": "test-output/{scenario}/compressed-{provider}.txt"
+  },
+  "provider": {
+    "id": "google:gemini-2.0-flash-exp",
+    "label": ""
+  },
+  "config": {}
+}

@@ -1,0 +1,210 @@
+#%RAML 1.0
+
+types:
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        required: true
+      description:
+        type: string
+      price:
+        type: number
+        required: true
+        minimum: 0.01
+      category:
+        type: string
+        required: true
+      inventory:
+        type: integer
+        required: true
+        minimum: 0
+      imageUrl:
+        type: string
+      createdAt:
+        type: datetime
+      updatedAt:
+        type: datetime
+  
+  OrderItem:
+    type: object
+    properties:
+      productId:
+        type: string
+        required: true
+      quantity:
+        type: integer
+        required: true
+        minimum: 1
+      unitPrice:
+        type: number
+        required: true
+  
+  Address:
+    type: object
+    properties:
+      street:
+        type: string
+        required: true
+      city:
+        type: string
+        required: true
+      state:
+        type: string
+        required: true
+      zipCode:
+        type: string
+        required: true
+      country:
+        type: string
+        required: true
+  
+  Order:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      customerId:
+        type: string
+        required: true
+      items:
+        type: array
+        items: OrderItem
+        required: true
+      status:
+        type: string
+        enum: [pending, processing, shipped, delivered]
+        default: pending
+      totalAmount:
+        type: number
+        required: true
+      shippingAddress:
+        type: Address
+        required: true
+      createdAt:
+        type: datetime
+      updatedAt:
+        type: datetime
+
+/products:
+  get:
+    description: List all products
+    queryParameters:
+      category:
+        type: string
+        required: false
+      minPrice:
+        type: number
+        required: false
+      maxPrice:
+        type: number
+        required: false
+      inStock:
+        type: boolean
+        required: false
+    responses:
+      200:
+        body:
+          type: array
+          items: Product
+  
+  post:
+    description: Create new product
+    body:
+      application/json:
+        type: Product
+        properties:
+          id?: nil
+          createdAt?: nil
+          updatedAt?: nil
+    responses:
+      201:
+        body:
+          type: Product
+      400:
+        body:
+          type: object
+          properties:
+            message: string
+            errors?: array
+
+  /{id}:
+    get:
+      description: Get product details
+      responses:
+        200:
+          body:
+            type: Product
+        404:
+          body:
+            type: object
+            properties:
+              message: string
+
+/orders:
+  get:
+    description: List orders
+    queryParameters:
+      customerId:
+        type: string
+        required: false
+      status:
+        type: string
+        required: false
+    responses:
+      200:
+        body:
+          type: array
+          items: Order
+  
+  post:
+    description: Create new order
+    body:
+      application/json:
+        properties:
+          customerId:
+            type: string
+            required: true
+          items:
+            type: array
+            items: OrderItem
+            required: true
+          shippingAddress:
+            type: Address
+            required: true
+    responses:
+      201:
+        body:
+          type: Order
+      400:
+        body:
+          type: object
+          properties:
+            message: string
+            errors?: array
+
+  /{id}:
+    /status:
+      patch:
+        description: Update order status
+        body:
+          application/json:
+            properties:
+              status:
+                type: string
+                enum: [pending, processing, shipped, delivered]
+                required: true
+        responses:
+          200:
+            body:
+              type: Order
+          404:
+            body:
+              type: object
+              properties:
+                message: string

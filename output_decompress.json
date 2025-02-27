@@ -1,0 +1,402 @@
+{
+  "evalId": "eval-Y82-2025-02-27T04:54:04",
+  "results": {
+    "version": 3,
+    "timestamp": "2025-02-27T04:54:04.349Z",
+    "prompts": [
+      {
+        "raw": "Transform the following SlimSpec notation into RAML:\n{{ output }}",
+        "label": "📂 DECOMPRESS: SlimSpec: prompts/slimspec-prompt-decompress.txt: Transform the following SlimSpec notation into RAML:\n{{ output }}",
+        "id": "ef113f365d596aeeef610ff6d28dc4daed1d8e92b95cbd28763080d3fb35b4cd",
+        "provider": "anthropic:messages:claude-3-7-sonnet-20250219",
+        "metrics": {
+          "score": 0,
+          "testPassCount": 0,
+          "testFailCount": 1,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 1,
+          "totalLatencyMs": 7,
+          "tokenUsage": {
+            "total": 149,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 149,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0.002007
+        }
+      },
+      {
+        "raw": "Transform the following SlimSpec notation into RAML:\n{{ output }}",
+        "label": "📂 DECOMPRESS: SlimSpec: prompts/slimspec-prompt-decompress.txt: Transform the following SlimSpec notation into RAML:\n{{ output }}",
+        "id": "ef113f365d596aeeef610ff6d28dc4daed1d8e92b95cbd28763080d3fb35b4cd",
+        "provider": "google:gemini-2.0-flash-exp",
+        "metrics": {
+          "score": 0,
+          "testPassCount": 0,
+          "testFailCount": 1,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 1,
+          "totalLatencyMs": 11,
+          "tokenUsage": {
+            "total": 2148,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 2148,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0.002007,
+        "error": "The output doesn't contain any RAML specification at all. The response simply states that no SlimSpec notation was provided to convert. Since no conversion was performed, there is no RAML specification to evaluate against the rubric. The output fails to demonstrate semantic equivalence to the RAML specification in the rubric.",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "The output doesn't contain any RAML specification at all. The response simply states that no SlimSpec notation was provided to convert. Since no conversion was performed, there is no RAML specification to evaluate against the rubric. The output fails to demonstrate semantic equivalence to the RAML specification in the rubric.",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 962,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 962
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Evaluate if the decompressed spec is semantially identical to original input in {{original_input}} Does it maintain all the essential structure, endpoints, parameters, and responses?",
+                "provider": "anthropic:messages:claude-3-7-sonnet-20250219",
+                "threshold": 0.9
+              },
+              "pass": false,
+              "score": 0,
+              "reason": "The output doesn't contain any RAML specification at all. The response simply states that no SlimSpec notation was provided to convert. Since no conversion was performed, there is no RAML specification to evaluate against the rubric. The output fails to demonstrate semantic equivalence to the RAML specification in the rubric.",
+              "tokensUsed": {
+                "total": 962,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 962,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "d154c8d1-f524-4570-a063-577d5f5d303b",
+        "latencyMs": 7,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Transform the following SlimSpec notation into RAML:\n",
+          "label": "📂 DECOMPRESS: SlimSpec: prompts/slimspec-prompt-decompress.txt: Transform the following SlimSpec notation into RAML:\n{{ output }}"
+        },
+        "promptId": "ef113f365d596aeeef610ff6d28dc4daed1d8e92b95cbd28763080d3fb35b4cd",
+        "promptIdx": 0,
+        "provider": {
+          "id": "anthropic:messages:claude-3-7-sonnet-20250219",
+          "label": ""
+        },
+        "response": {
+          "output": "I'll transform the SlimSpec notation into RAML format. However, since you haven't provided any SlimSpec notation in your message, I can't perform the transformation.\n\nIf you'd like me to convert SlimSpec to RAML, please provide the SlimSpec notation you want transformed, and I'll be happy to convert it to RAML format for you.\n\nRAML (RESTful API Modeling Language) is a YAML-based language for describing RESTful APIs, and I can help you convert from SlimSpec to this format once you provide the source content.",
+          "tokenUsage": {
+            "cached": 149,
+            "total": 149
+          },
+          "cost": 0.002007
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "metadata": {},
+          "options": {},
+          "vars": {
+            "test_name": "Simple CRUD API",
+            "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+            "expected_compressed": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}||{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+            "input_file": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Evaluate if the decompressed spec is semantially identical to original input in {{original_input}} Does it maintain all the essential structure, endpoints, parameters, and responses?",
+              "provider": "anthropic:messages:claude-3-7-sonnet-20250219",
+              "threshold": 0.9
+            }
+          ],
+          "description": "📦 COMPRESS: {{test_name}}"
+        },
+        "testIdx": 0,
+        "vars": {
+          "test_name": "Simple CRUD API",
+          "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+          "expected_compressed": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}||{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+          "input_file": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found"
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "The output does not contain a decompressed spec that is semantically identical to the RAML input provided in the rubric. Instead, it provides a general explanation of how to convert from a hypothetical 'SlimSpec' notation to RAML, with examples that don't match the specific RAML in the rubric. The output doesn't include the User type definition, traits like 'paged', or the specific endpoints (/users GET, POST, /{id} GET, PUT, DELETE) with their exact parameters and responses as defined in the rubric.",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "The output does not contain a decompressed spec that is semantically identical to the RAML input provided in the rubric. Instead, it provides a general explanation of how to convert from a hypothetical 'SlimSpec' notation to RAML, with examples that don't match the specific RAML in the rubric. The output doesn't include the User type definition, traits like 'paged', or the specific endpoints (/users GET, POST, /{id} GET, PUT, DELETE) with their exact parameters and responses as defined in the rubric.",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 3128,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 3128
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Evaluate if the decompressed spec is semantially identical to original input in {{original_input}} Does it maintain all the essential structure, endpoints, parameters, and responses?",
+                "provider": "anthropic:messages:claude-3-7-sonnet-20250219",
+                "threshold": 0.9
+              },
+              "pass": false,
+              "score": 0,
+              "reason": "The output does not contain a decompressed spec that is semantically identical to the RAML input provided in the rubric. Instead, it provides a general explanation of how to convert from a hypothetical 'SlimSpec' notation to RAML, with examples that don't match the specific RAML in the rubric. The output doesn't include the User type definition, traits like 'paged', or the specific endpoints (/users GET, POST, /{id} GET, PUT, DELETE) with their exact parameters and responses as defined in the rubric.",
+              "tokensUsed": {
+                "total": 3128,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 3128,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "30f9b9fd-7ba9-4705-ad71-764b4a3bae15",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Transform the following SlimSpec notation into RAML:\n",
+          "label": "📂 DECOMPRESS: SlimSpec: prompts/slimspec-prompt-decompress.txt: Transform the following SlimSpec notation into RAML:\n{{ output }}"
+        },
+        "promptId": "ef113f365d596aeeef610ff6d28dc4daed1d8e92b95cbd28763080d3fb35b4cd",
+        "promptIdx": 1,
+        "provider": {
+          "id": "google:gemini-2.0-flash-exp",
+          "label": ""
+        },
+        "response": {
+          "output": "Okay, let's break down how to transform SlimSpec notation into RAML (RESTful API Modeling Language).  Since you haven't provided any SlimSpec notation, I'll provide a general example and then demonstrate the conversion.  I'll also cover common SlimSpec elements and how they map to RAML.\n\n**Example SlimSpec (Hypothetical)**\n\n```slimspec\n# API: User Management\n\n## Resource: /users\n\n### Method: GET\nDescription: Retrieves a list of users.\nResponse:\n  200:\n    Description: Successful retrieval.\n    Body:\n      application/json:\n        Schema:\n          type: array\n          items:\n            type: object\n            properties:\n              id: { type: integer, description: \"User ID\" }\n              name: { type: string, description: \"User Name\" }\n              email: { type: string, description: \"User Email\" }\n\n### Method: POST\nDescription: Creates a new user.\nRequest:\n  Body:\n    application/json:\n      Schema:\n        type: object\n        properties:\n          name: { type: string, required: true, description: \"User Name\" }\n          email: { type: string, required: true, description: \"User Email\" }\nResponse:\n  201:\n    Description: User created successfully.\n    Headers:\n      Location: { type: string, description: \"URL of the new user\" }\n  400:\n    Description: Invalid request.\n    Body:\n      application/json:\n        Schema:\n          type: object\n          properties:\n            error: { type: string, description: \"Error message\" }\n\n## Resource: /users/{userId}\n\n### Method: GET\nDescription: Retrieves a specific user.\nParameters:\n  userId: { type: integer, required: true, description: \"User ID\" }\nResponse:\n  200:\n    Description: Successful retrieval.\n    Body:\n      application/json:\n        Schema:\n          type: object\n          properties:\n            id: { type: integer, description: \"User ID\" }\n            name: { type: string, description: \"User Name\" }\n            email: { type: string, description: \"User Email\" }\n  404:\n    Description: User not found.\n```\n\n**RAML Equivalent**\n\n```raml\n#%RAML 1.0\ntitle: User Management API\nversion: v1\n\n/users:\n  get:\n    description: Retrieves a list of users.\n    responses:\n      200:\n        description: Successful retrieval.\n        body:\n          application/json:\n            schema: |\n              {\n                \"type\": \"array\",\n                \"items\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id\": { \"type\": \"integer\", \"description\": \"User ID\" },\n                    \"name\": { \"type\": \"string\", \"description\": \"User Name\" },\n                    \"email\": { \"type\": \"string\", \"description\": \"User Email\" }\n                  }\n                }\n              }\n  post:\n    description: Creates a new user.\n    body:\n      application/json:\n        schema: |\n          {\n            \"type\": \"object\",\n            \"properties\": {\n              \"name\": { \"type\": \"string\", \"required\": true, \"description\": \"User Name\" },\n              \"email\": { \"type\": \"string\", \"required\": true, \"description\": \"User Email\" }\n            },\n            \"required\": [\"name\", \"email\"]\n          }\n    responses:\n      201:\n        description: User created successfully.\n        headers:\n          Location:\n            type: string\n            description: URL of the new user\n      400:\n        description: Invalid request.\n        body:\n          application/json:\n            schema: |\n              {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"error\": { \"type\": \"string\", \"description\": \"Error message\" }\n                }\n              }\n\n  /{userId}:\n    uriParameters:\n      userId:\n        type: integer\n        required: true\n        description: User ID\n    get:\n      description: Retrieves a specific user.\n      responses:\n        200:\n          description: Successful retrieval.\n          body:\n            application/json:\n              schema: |\n                {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id\": { \"type\": \"integer\", \"description\": \"User ID\" },\n                    \"name\": { \"type\": \"string\", \"description\": \"User Name\" },\n                    \"email\": { \"type\": \"string\", \"description\": \"User Email\" }\n                  }\n                }\n        404:\n          description: User not found.\n```\n\n**Explanation of the Conversion**\n\n1. **RAML Header:**  RAML files start with `#%RAML 1.0` to specify the RAML version.  You can also add `title` and `version` for the API.\n\n2. **Resources:** SlimSpec resources (e.g., `/users`, `/users/{userId}`) become RAML resources.  The hierarchy is maintained.\n\n3. **Methods:** SlimSpec methods (GET, POST, PUT, DELETE, etc.) become RAML method definitions under the resource.\n\n4. **Descriptions:** SlimSpec descriptions are directly mapped to RAML `description` fields.\n\n5. **Request Body:**\n   - SlimSpec's `Request: Body:` maps to RAML's `body:` under the method.\n   - The `application/json` content type is specified.\n   - The `Schema` in SlimSpec becomes the `schema` property in RAML.  You'll often need to use a YAML block scalar (`|`) to embed the JSON schema directly into the RAML file.\n   - `required: true` in SlimSpec properties translates to adding the property name to the `required` array in the RAML schema.\n\n6. **Response:**\n   - SlimSpec's `Response:` maps to RAML's `responses:` under the method.\n   - HTTP status codes (200, 201, 400, 404, etc.) are used as keys in the `responses` map.\n   - The `Description` and `Body` within the response are handled similarly to the request body.\n   - `Headers` in SlimSpec map to RAML's `headers:` under the response.\n\n7. **Parameters:**\n   - SlimSpec's `Parameters:` for path parameters (like `{userId}`) are defined using `uriParameters:` in RAML.  You specify the `type`, `required`, and `description` for each parameter.\n   - Query parameters would be defined using `queryParameters:` in RAML.\n\n**General Mapping Table**\n\n| SlimSpec Element | RAML Equivalent | Notes |\n|---|---|---|\n| `API:` | `title:` (in RAML root) | API Title |\n| `Resource:` | Resource path (e.g., `/users`) |  Hierarchy is preserved |\n| `Method:` | `get:`, `post:`, `put:`, `delete:`, etc. | HTTP method |\n| `Description:` | `description:` |  For resources, methods, parameters, responses, etc. |\n| `Request: Body:` | `body:` |  Under the method |\n| `Response:` | `responses:` | Under the method |\n| `Schema:` | `schema:` |  Under `body:` (use YAML block scalar `|`) |\n| `Parameters:` (path) | `uriParameters:` | Under the resource |\n| `Parameters:` (query) | `queryParameters:` | Under the method |\n| `Headers:` | `headers:` | Under the response |\n| `required: true` (in schema) | Add property to `required` array in schema |  |\n| `type:` (in schema) | `type:` (in schema) |  `string`, `integer`, `number`, `boolean`, `array`, `object` |\n\n**Important Considerations**\n\n* **YAML Syntax:** RAML is YAML-based, so indentation and spacing are crucial.  Use a YAML validator to ensure your RAML is valid.\n* **Schema Formats:** RAML supports JSON Schema and XML Schema.  The example above uses JSON Schema.\n* **Data Types:**  RAML has built-in data types (string, integer, number, boolean, date, file, etc.).  Use these where appropriate.\n* **Includes:**  For larger APIs, you can break your RAML definition into multiple files and use includes (`!include`) to keep things organized.\n* **Annotations:** RAML allows you to add custom annotations (using `(annotationName): value`) for documentation or tooling purposes.\n\n**How to Use This**\n\n1. **Provide Your SlimSpec:**  Give me the actual SlimSpec notation you want to convert.  The more detail you provide, the more accurate the conversion will be.\n2. **I'll Generate RAML:** I'll use the mapping table and the example above to create the RAML equivalent.\n3. **Validate:**  Use a RAML validator (online or a command-line tool) to check the generated RAML for errors.\n4. **Refine:**  You may need to adjust the RAML to match your specific requirements or to take advantage of more advanced RAML features.\n\nLet me know if you have any questions or if you'd like me to convert a specific SlimSpec example!\n",
+          "tokenUsage": {
+            "cached": 2148,
+            "total": 2148,
+            "numRequests": 0
+          },
+          "raw": {
+            "candidates": [
+              {
+                "content": {
+                  "parts": [
+                    {
+                      "text": "Okay, let's break down how to transform SlimSpec notation into RAML (RESTful API Modeling Language).  Since you haven't provided any SlimSpec notation, I'll provide a general example and then demonstrate the conversion.  I'll also cover common SlimSpec elements and how they map to RAML.\n\n**Example SlimSpec (Hypothetical)**\n\n```slimspec\n# API: User Management\n\n## Resource: /users\n\n### Method: GET\nDescription: Retrieves a list of users.\nResponse:\n  200:\n    Description: Successful retrieval.\n    Body:\n      application/json:\n        Schema:\n          type: array\n          items:\n            type: object\n            properties:\n              id: { type: integer, description: \"User ID\" }\n              name: { type: string, description: \"User Name\" }\n              email: { type: string, description: \"User Email\" }\n\n### Method: POST\nDescription: Creates a new user.\nRequest:\n  Body:\n    application/json:\n      Schema:\n        type: object\n        properties:\n          name: { type: string, required: true, description: \"User Name\" }\n          email: { type: string, required: true, description: \"User Email\" }\nResponse:\n  201:\n    Description: User created successfully.\n    Headers:\n      Location: { type: string, description: \"URL of the new user\" }\n  400:\n    Description: Invalid request.\n    Body:\n      application/json:\n        Schema:\n          type: object\n          properties:\n            error: { type: string, description: \"Error message\" }\n\n## Resource: /users/{userId}\n\n### Method: GET\nDescription: Retrieves a specific user.\nParameters:\n  userId: { type: integer, required: true, description: \"User ID\" }\nResponse:\n  200:\n    Description: Successful retrieval.\n    Body:\n      application/json:\n        Schema:\n          type: object\n          properties:\n            id: { type: integer, description: \"User ID\" }\n            name: { type: string, description: \"User Name\" }\n            email: { type: string, description: \"User Email\" }\n  404:\n    Description: User not found.\n```\n\n**RAML Equivalent**\n\n```raml\n#%RAML 1.0\ntitle: User Management API\nversion: v1\n\n/users:\n  get:\n    description: Retrieves a list of users.\n    responses:\n      200:\n        description: Successful retrieval.\n        body:\n          application/json:\n            schema: |\n              {\n                \"type\": \"array\",\n                \"items\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id\": { \"type\": \"integer\", \"description\": \"User ID\" },\n                    \"name\": { \"type\": \"string\", \"description\": \"User Name\" },\n                    \"email\": { \"type\": \"string\", \"description\": \"User Email\" }\n                  }\n                }\n              }\n  post:\n    description: Creates a new user.\n    body:\n      application/json:\n        schema: |\n          {\n            \"type\": \"object\",\n            \"properties\": {\n              \"name\": { \"type\": \"string\", \"required\": true, \"description\": \"User Name\" },\n              \"email\": { \"type\": \"string\", \"required\": true, \"description\": \"User Email\" }\n            },\n            \"required\": [\"name\", \"email\"]\n          }\n    responses:\n      201:\n        description: User created successfully.\n        headers:\n          Location:\n            type: string\n            description: URL of the new user\n      400:\n        description: Invalid request.\n        body:\n          application/json:\n            schema: |\n              {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"error\": { \"type\": \"string\", \"description\": \"Error message\" }\n                }\n              }\n\n  /{userId}:\n    uriParameters:\n      userId:\n        type: integer\n        required: true\n        description: User ID\n    get:\n      description: Retrieves a specific user.\n      responses:\n        200:\n          description: Successful retrieval.\n          body:\n            application/json:\n              schema: |\n                {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id\": { \"type\": \"integer\", \"description\": \"User ID\" },\n                    \"name\": { \"type\": \"string\", \"description\": \"User Name\" },\n                    \"email\": { \"type\": \"string\", \"description\": \"User Email\" }\n                  }\n                }\n        404:\n          description: User not found.\n```\n\n**Explanation of the Conversion**\n\n1. **RAML Header:**  RAML files start with `#%RAML 1.0` to specify the RAML version.  You can also add `title` and `version` for the API.\n\n2. **Resources:** SlimSpec resources (e.g., `/users`, `/users/{userId}`) become RAML resources.  The hierarchy is maintained.\n\n3. **Methods:** SlimSpec methods (GET, POST, PUT, DELETE, etc.) become RAML method definitions under the resource.\n\n4. **Descriptions:** SlimSpec descriptions are directly mapped to RAML `description` fields.\n\n5. **Request Body:**\n   - SlimSpec's `Request: Body:` maps to RAML's `body:` under the method.\n   - The `application/json` content type is specified.\n   - The `Schema` in SlimSpec becomes the `schema` property in RAML.  You'll often need to use a YAML block scalar (`|`) to embed the JSON schema directly into the RAML file.\n   - `required: true` in SlimSpec properties translates to adding the property name to the `required` array in the RAML schema.\n\n6. **Response:**\n   - SlimSpec's `Response:` maps to RAML's `responses:` under the method.\n   - HTTP status codes (200, 201, 400, 404, etc.) are used as keys in the `responses` map.\n   - The `Description` and `Body` within the response are handled similarly to the request body.\n   - `Headers` in SlimSpec map to RAML's `headers:` under the response.\n\n7. **Parameters:**\n   - SlimSpec's `Parameters:` for path parameters (like `{userId}`) are defined using `uriParameters:` in RAML.  You specify the `type`, `required`, and `description` for each parameter.\n   - Query parameters would be defined using `queryParameters:` in RAML.\n\n**General Mapping Table**\n\n| SlimSpec Element | RAML Equivalent | Notes |\n|---|---|---|\n| `API:` | `title:` (in RAML root) | API Title |\n| `Resource:` | Resource path (e.g., `/users`) |  Hierarchy is preserved |\n| `Method:` | `get:`, `post:`, `put:`, `delete:`, etc. | HTTP method |\n| `Description:` | `description:` |  For resources, methods, parameters, responses, etc. |\n| `Request: Body:` | `body:` |  Under the method |\n| `Response:` | `responses:` | Under the method |\n| `Schema:` | `schema:` |  Under `body:` (use YAML block scalar `|`) |\n| `Parameters:` (path) | `uriParameters:` | Under the resource |\n| `Parameters:` (query) | `queryParameters:` | Under the method |\n| `Headers:` | `headers:` | Under the response |\n| `required: true` (in schema) | Add property to `required` array in schema |  |\n| `type:` (in schema) | `type:` (in schema) |  `string`, `integer`, `number`, `boolean`, `array`, `object` |\n\n**Important Considerations**\n\n* **YAML Syntax:** RAML is YAML-based, so indentation and spacing are crucial.  Use a YAML validator to ensure your RAML is valid.\n* **Schema Formats:** RAML supports JSON Schema and XML Schema.  The example above uses JSON Schema.\n* **Data Types:**  RAML has built-in data types (string, integer, number, boolean, date, file, etc.).  Use these where appropriate.\n* **Includes:**  For larger APIs, you can break your RAML definition into multiple files and use includes (`!include`) to keep things organized.\n* **Annotations:** RAML allows you to add custom annotations (using `(annotationName): value`) for documentation or tooling purposes.\n\n**How to Use This**\n\n1. **Provide Your SlimSpec:**  Give me the actual SlimSpec notation you want to convert.  The more detail you provide, the more accurate the conversion will be.\n2. **I'll Generate RAML:** I'll use the mapping table and the example above to create the RAML equivalent.\n3. **Validate:**  Use a RAML validator (online or a command-line tool) to check the generated RAML for errors.\n4. **Refine:**  You may need to adjust the RAML to match your specific requirements or to take advantage of more advanced RAML features.\n\nLet me know if you have any questions or if you'd like me to convert a specific SlimSpec example!\n"
+                    }
+                  ],
+                  "role": "model"
+                },
+                "finishReason": "STOP",
+                "citationMetadata": {
+                  "citationSources": [
+                    {
+                      "startIndex": 596,
+                      "endIndex": 811,
+                      "uri": "https://github.com/clarkhao/fullstack-user"
+                    },
+                    {
+                      "startIndex": 1746,
+                      "endIndex": 1953,
+                      "uri": "https://github.com/clarkhao/fullstack-user"
+                    },
+                    {
+                      "startIndex": 2375,
+                      "endIndex": 2648,
+                      "uri": "https://github.com/clarkhao/fullstack-user"
+                    },
+                    {
+                      "startIndex": 3977,
+                      "endIndex": 4250,
+                      "uri": "https://github.com/clarkhao/fullstack-user"
+                    }
+                  ]
+                },
+                "avgLogprobs": -0.1203741377963047
+              }
+            ],
+            "usageMetadata": {
+              "promptTokenCount": 11,
+              "candidatesTokenCount": 2137,
+              "totalTokenCount": 2148,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 11
+                }
+              ],
+              "candidatesTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 2137
+                }
+              ]
+            },
+            "modelVersion": "gemini-2.0-flash-exp"
+          },
+          "cached": true
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "metadata": {},
+          "options": {},
+          "vars": {
+            "test_name": "Simple CRUD API",
+            "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+            "expected_compressed": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}||{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+            "input_file": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Evaluate if the decompressed spec is semantially identical to original input in {{original_input}} Does it maintain all the essential structure, endpoints, parameters, and responses?",
+              "provider": "anthropic:messages:claude-3-7-sonnet-20250219",
+              "threshold": 0.9
+            }
+          ],
+          "description": "📦 COMPRESS: {{test_name}}"
+        },
+        "testIdx": 0,
+        "vars": {
+          "test_name": "Simple CRUD API",
+          "original_input": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found",
+          "expected_compressed": "F:Timestamps{createdAt:d!,updatedAt:d!}\nE:NotFound{message:s!}\nE:ValidationError{message:s!}\nT:User{id:s!,username:s!,email:s!,+Timestamps}\nT:UserCreate{username:s!,email:s!}\nT:UserUpdate{username:s?,email:s?}\nG/users|{limit:i?=20,offset:i?=0}|{200:*User[]}\nPO/users|{body:*UserCreate!}|{201:*User,400:*ValidationError}\nG/users/{id:s!}||{200:*User,404:*NotFound}\nPU/users/{id:s!}|{body:*UserUpdate!}|{200:*User,404:*NotFound}\nD/users/{id:s!}||{204,404:*NotFound}",
+          "input_file": "#%RAML 1.0\n\ntypes:\n  User:\n    type: object\n    properties:\n      id:\n        type: string\n        format: uuid\n      username:\n        type: string\n        required: true\n      email:\n        type: string\n        required: true\n        format: email\n      createdAt:\n        type: datetime\n      updatedAt:\n        type: datetime\n\ntraits:\n  paged:\n    queryParameters:\n      limit:\n        type: integer\n        default: 20\n        description: Maximum number of items to return\n      offset:\n        type: integer\n        default: 0\n        description: Number of items to skip\n\n/users:\n  get:\n    description: Returns all users\n    is: [paged]\n    responses:\n      200:\n        body:\n          application/json:\n            type: array\n            items: User\n  \n  post:\n    description: Creates a new user\n    body:\n      application/json:\n        properties:\n          username:\n            type: string\n            required: true\n          email:\n            type: string\n            required: true\n            format: email\n    responses:\n      201:\n        body:\n          application/json:\n            type: User\n      400:\n        description: Bad request when validation fails\n\n  /{id}:\n    uriParameters:\n      id:\n        type: string\n        required: true\n    \n    get:\n      description: Returns a specific user\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    put:\n      description: Updates a user\n      body:\n        application/json:\n          properties:\n            username:\n              type: string\n              required: false\n            email:\n              type: string\n              required: false\n              format: email\n      responses:\n        200:\n          body:\n            application/json:\n              type: User\n        404:\n          description: User not found\n    \n    delete:\n      description: Deletes a user\n      responses:\n        204:\n          description: User successfully deleted\n        404:\n          description: User not found"
+        },
+        "metadata": {},
+        "failureReason": 1
+      }
+    ],
+    "stats": {
+      "successes": 0,
+      "failures": 2,
+      "errors": 0,
+      "tokenUsage": {
+        "cached": 2297,
+        "completion": 0,
+        "prompt": 0,
+        "total": 2297,
+        "numRequests": 2,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0
+        }
+      }
+    }
+  },
+  "config": {
+    "tags": {},
+    "prompts": [
+      {
+        "id": "decompress",
+        "label": "📂 DECOMPRESS: SlimSpec",
+        "raw": "prompts/slimspec-prompt-decompress.txt"
+      }
+    ],
+    "providers": [
+      {
+        "id": "anthropic:messages:claude-3-7-sonnet-20250219",
+        "config": {
+          "temperature": 0,
+          "max_tokens": 9999
+        }
+      },
+      {
+        "id": "google:gemini-2.0-flash-exp",
+        "config": {
+          "temperature": 0,
+          "max_tokens": 9999
+        }
+      }
+    ],
+    "tests": [],
+    "scenarios": [
+      {
+        "description": "SlimSpec Compression and Decompression Pipeline",
+        "config": [
+          {
+            "vars": {
+              "test_name": "Simple CRUD API",
+              "original_input": "file://test-cases/simple-crud/input.txt",
+              "expected_compressed": "file://test-cases/simple-crud/output.txt"
+            }
+          }
+        ],
+        "tests": [
+          {
+            "description": "📦 COMPRESS: {{test_name}}",
+            "vars": {
+              "input_file": "{{original_input}}"
+            },
+            "assert": [
+              {
+                "type": "llm-rubric",
+                "value": "Evaluate if the decompressed spec is semantially identical to original input in {{original_input}} Does it maintain all the essential structure, endpoints, parameters, and responses?",
+                "provider": "anthropic:messages:claude-3-7-sonnet-20250219",
+                "threshold": 0.9
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "env": {},
+    "sharing": true,
+    "defaultTest": {
+      "vars": {},
+      "assert": [],
+      "options": {},
+      "metadata": {}
+    },
+    "outputPath": [
+      "output_decompress.json"
+    ],
+    "extensions": [],
+    "metadata": {}
+  },
+  "shareableUrl": null
+}
