@@ -1,5 +1,6 @@
 ![slimspec banner waifu](banner.png)
 
+```bash
   /$$$$$$  /$$ /$$                /$$$$$$                               
  /$$__  $$| $$|__/               /$$__  $$                              
 | $$  \__/| $$ /$$ /$$$$$$/$$$$ | $$  \__/  /$$$$$$   /$$$$$$   /$$$$$$$
@@ -10,7 +11,8 @@
  \______/ |__/|__/|__/ |__/ |__/ \______/ | $$____/  \_______/ \_______/
                                           | $$                          
                                           | $$                          
-                                          |__/                          
+                                          |__/            
+```                                                        
 # SlimSpec : Towards Zero-Shot, API Spec Compression & Decompression
 SlimSpec is a token-optimized format for representing API specifications with semantic precision. Designed for Zero-Shot LLM context window efficiency.
 
