@@ -1,0 +1,14 @@
+<!-- SlimSpec compressed from input.txt using anthropic:messages:claude-3-7-sonnet-latest -->
+
+# from: RAML 1.0
+
+@meta{title:Book API,version:v1,baseUri:https://api.example.com/books}
+T:Book{id:s!,title:s!,author:s!,publishDate:s?}
+T:BookRequest{title:s!,author:s!,publishDate:s?}
+E:Error{code:i!,message:s!}
+
+GET/books||{200(a/json):Book[]}
+GET/books/{bookId:s!}||{200(a/json):*Book,404:*Error}
+POST/books|{*BookRequest}|{201(a/json):*Book,400:*Error}
+PUT/books/{bookId:s!}|{*BookRequest}|{200(a/json):*Book,404:*Error}
+DELETE/books/{bookId:s!}||{204,404:*Error}

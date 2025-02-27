@@ -1,6 +1,20 @@
-# SlimSpec : Towards Zero-Shot ApiSpec-To-Doc 
+![slimspec banner waifu](banner.png)
 
+  /$$$$$$  /$$ /$$                /$$$$$$                               
+ /$$__  $$| $$|__/               /$$__  $$                              
+| $$  \__/| $$ /$$ /$$$$$$/$$$$ | $$  \__/  /$$$$$$   /$$$$$$   /$$$$$$$
+|  $$$$$$ | $$| $$| $$_  $$_  $$|  $$$$$$  /$$__  $$ /$$__  $$ /$$_____/
+ \____  $$| $$| $$| $$ \ $$ \ $$ \____  $$| $$  \ $$| $$$$$$$$| $$      
+ /$$  \ $$| $$| $$| $$ | $$ | $$ /$$  \ $$| $$  | $$| $$_____/| $$      
+|  $$$$$$/| $$| $$| $$ | $$ | $$|  $$$$$$/| $$$$$$$/|  $$$$$$$|  $$$$$$$
+ \______/ |__/|__/|__/ |__/ |__/ \______/ | $$____/  \_______/ \_______/
+                                          | $$                          
+                                          | $$                          
+                                          |__/                          
+# SlimSpec : Towards Zero-Shot, API Spec Compression & Decompression
 SlimSpec is a token-optimized format for representing API specifications with semantic precision. Designed for Zero-Shot LLM context window efficiency.
+
+At the current iteration, It achieves 66% less tokens than traditional RAML.
 
 ## Evaluations
 
@@ -27,10 +41,49 @@ Rubric was tested with Zero-Shot decompression with NO CONTEXT WHATSOEVER.
 - Preserves exact structure of request/response bodies
 - Maintains precision for date/time types, formats, and constraints
 
+## Installation
+```bash
+# Install globally
+bun install -g slimspec
+
+# Or run with bunx
+bunx slimspec
+```
+
 ## Usage
 
-```javascript
-// cli tool coming soon
+```bash
+# Compress all files in current directory
+slimspec c .
+
+# Compress specific file
+slimspec c ./api-spec.raml
+
+# Compress with specific model
+slimspec c . --model openai:gpt-4o
+
+# Compress with custom prompt
+slimspec c . --prompt ./custom-prompt.txt
+
+# Compress to custom output directory
+slimspec c . --output ./compressed-specs
+```
+```bash
+# Decompress all .apaic files in current directory
+slimspec d .
+
+# Decompress specific file
+slimspec d ./api-spec.apaic
+
+# Decompress with specific model
+slimspec d . --model openai:gpt-4o
+
+# Decompress with custom prompt
+slimspec d . --prompt ./custom-decompress-prompt.txt
+
+# By default, fileps are saved in the same directory as the input file
+# To save in a custom output directory:
+slimspec d . --output ./decompressed-specs
 ```
 
 ## Syntax Reference

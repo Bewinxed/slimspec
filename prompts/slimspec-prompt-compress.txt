@@ -77,5 +77,5 @@ T:User{id:s?,createdAt:d(datetime)?,email:s(email)!}
 POST/users|{email:s(email)!,name:s?}@originalInline|{201(a/json):*User#Created,400:{message:s?}}
 ```
 
-OUTPUT ONLY SLIMPSEC, NOTHING ELSE, here's your input:
+OUTPUT ONLY SLIMPSEC, No quotes, NOTHING ELSE, add a hint at the top hinting what format the file was converted from like # from: xxx, here's your input:
 {{ input_file }}

@@ -1,4 +1,3 @@
-```
 @meta{mediaType:application/json}
 T:Product{id:s(uuid)?,name:s!,description:s?,price:n!>=0.01,category:s!,inventory:i!>=0,imageUrl:s?,createdAt:d(datetime)?,updatedAt:d(datetime)?}
 T:OrderItem{productId:s!,quantity:i!>=1,unitPrice:n!}
@@ -12,4 +11,3 @@ GET/products/{id:s!}||{200:*Product#Get product details,404:{message:s!}}
 GET/orders|{customerId:s?,status:s?}|{200:Order[]#List orders}
 POST/orders|{customerId:s!,items:OrderItem[]!,shippingAddress:Address!}@originalInline|{201:*Order,400:{message:s!,errors:array?}}
 PATCH/orders/{id:s!}/status|{status:s! e(pending|processing|shipped|delivered)}@originalInline|{200:*Order#Update order status,404:{message:s!}}
-```

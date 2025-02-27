@@ -1,0 +1,14 @@
+<!-- SlimSpec compressed from input.txt using anthropic:messages:claude-3-7-sonnet-latest -->
+
+# from: RAML 1.0
+
+@meta{baseUri:https://api.company.com/v1,mediaType:application/json}
+T:Product{id:i!,name:s!,description:s?,price:n!,inStock:b!}
+T:ProductList{items:Product[]!,total:i!}
+T:Error{code:i!,message:s!}
+
+GET/products|{page:i?=1,perPage:i?=10}|{200(a/json):*ProductList,400:*Error}
+GET/products/{id:i!}||{200(a/json):*Product,404:*Error}
+POST/products|{name:s!,description:s?,price:n!,inStock:b!}@originalInline|{201(a/json):*Product,400:*Error}
+PUT/products/{id:i!}|{name:s!,description:s?,price:n!,inStock:b!}@originalInline|{200(a/json):*Product,404:*Error}
+DELETE/products/{id:i!}||{204,404:*Error}
