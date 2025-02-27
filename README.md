@@ -2,6 +2,23 @@
 
 SlimSpec is a token-optimized format for representing API specifications with semantic precision. Designed for LLM context window efficiency.
 
+## Evaluations
+
+3 Tests were done based on 3 examples:
+1 - Simple CRUD API
+2 - Complex E-commerce API
+3 - Nested and recursive structures
+
+**Compression Test**
+[compression](https://app.promptfoo.dev/eval/f:61513ea9-b9bf-4d98-8ad9-4fb83c3db224/)
+All popular LLMs appear to be able to compress SlimSpec to a similar token count.
+
+**Decompression Test**
+[decompression](https://app.promptfoo.dev/eval/f:5291008f-7f31-4bd3-8b16-cd462bbcab43/)
+Sonnet > Gemini > Gpt-4o > Deepseek.
+
+Rubric was tested with Zero-Shot decompression with NO CONTEXT WHATSOEVER.
+
 ## Features
 
 - 60-70% token reduction compared to standard API specifications
